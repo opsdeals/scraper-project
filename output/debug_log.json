@@ -1,0 +1,128 @@
+[
+  {
+    "store_name": "Palmetto State Armory",
+    "url": "https://palmettostatearmory.com/daily-deals-new.html",
+    "status": 403,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": "403 Client Error: Forbidden for url: https://palmettostatearmory.com/daily-deals-new.html"
+  },
+  {
+    "store_name": "Bear Creek Arsenal",
+    "url": "https://www.bearcreekarsenal.com/deals-den.html",
+    "status": 200,
+    "selector_used": "li.product",
+    "cards_found": 12,
+    "items_extracted": 12,
+    "error": null
+  },
+  {
+    "store_name": "Bereli",
+    "url": "https://www.bereli.com/deals",
+    "status": 200,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": null
+  },
+  {
+    "store_name": "Midway USA",
+    "url": "https://www.midwayusa.com/ammunition/br?cid=653&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "status": 403,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/ammunition/br?cid=653&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box"
+  },
+  {
+    "store_name": "Midway USA",
+    "url": "https://www.midwayusa.com/knives-and-tools/br?cid=18708&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "status": 403,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/knives-and-tools/br?cid=18708&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box"
+  },
+  {
+    "store_name": "Midway USA",
+    "url": "https://www.midwayusa.com/hunting-gear/br?cid=10611&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "status": 403,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/hunting-gear/br?cid=10611&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box"
+  },
+  {
+    "store_name": "Midway USA",
+    "url": "https://www.midwayusa.com/shooting-gear/br?cid=655&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "status": 403,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/shooting-gear/br?cid=655&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box"
+  },
+  {
+    "store_name": "Sportsman's Outdoor Superstore",
+    "url": "https://www.sportsmansoutdoorsuperstore.com/black-friday.cfm/sale/all",
+    "status": 200,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": null
+  },
+  {
+    "store_name": "Dirty Bird USA",
+    "url": "https://dirtybirdusa.com/collections/daily-deals/",
+    "status": 200,
+    "selector_used": "li.product",
+    "cards_found": 24,
+    "items_extracted": 20,
+    "error": null
+  },
+  {
+    "store_name": "Gun Mag Warehouse",
+    "url": "https://gunmagwarehouse.com/sale",
+    "status": 200,
+    "selector_used": "li.product",
+    "cards_found": 40,
+    "items_extracted": 20,
+    "error": null
+  },
+  {
+    "store_name": "The Gun Dock",
+    "url": "https://www.thegundock.com/live/deals",
+    "status": 200,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": null
+  },
+  {
+    "store_name": "Vance Outdoors",
+    "url": "https://www.vanceoutdoors.com/category.cfm/sale/y",
+    "status": 200,
+    "selector_used": ".product-card",
+    "cards_found": 18,
+    "items_extracted": 18,
+    "error": null
+  },
+  {
+    "store_name": "OpticsPlanet",
+    "url": "https://ads.opticsplanet.com/blazin-deal.html",
+    "status": 200,
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": null
+  },
+  {
+    "store_name": "RMA Defense",
+    "url": "https://rmadefense.com/product-category/steals-and-deals/",
+    "status": 200,
+    "selector_used": "ul.products li.product",
+    "cards_found": 7,
+    "items_extracted": 7,
+    "error": null
+  }
+]
