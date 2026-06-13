@@ -13,11 +13,11 @@
     "store_name": "Bear Creek Arsenal",
     "url": "https://www.bearcreekarsenal.com/deals-den.html",
     "status": 200,
-    "selector_used": null,
-    "cards_found": 0,
-    "items_extracted": 0,
+    "selector_used": "li.product",
+    "cards_found": 12,
+    "items_extracted": 12,
     "error": null,
-    "candidate_selectors": []
+    "candidate_selectors": null
   },
   {
     "store_name": "Bereli",
@@ -27,7 +27,10 @@
     "cards_found": 0,
     "items_extracted": 0,
     "error": null,
-    "candidate_selectors": []
+    "candidate_selectors": {
+      "price_element": [],
+      "card_candidates": []
+    }
   },
   {
     "store_name": "Midway USA",
@@ -77,7 +80,36 @@
     "cards_found": 0,
     "items_extracted": 0,
     "error": null,
-    "candidate_selectors": []
+    "candidate_selectors": {
+      "price_element": [
+        {
+          "selector": "span.price",
+          "count": 19
+        },
+        {
+          "selector": "span.sugg-price",
+          "count": 16
+        },
+        {
+          "selector": "span.price-per",
+          "count": 12
+        }
+      ],
+      "card_candidates": [
+        {
+          "selector": "ul.list-unstyled",
+          "count": 45
+        },
+        {
+          "selector": "ul.list-unstyled.bulk",
+          "count": 1
+        },
+        {
+          "selector": "li.bulk-norm",
+          "count": 1
+        }
+      ]
+    }
   },
   {
     "store_name": "Dirty Bird USA",
@@ -93,11 +125,11 @@
     "store_name": "Gun Mag Warehouse",
     "url": "https://gunmagwarehouse.com/sale",
     "status": 200,
-    "selector_used": null,
-    "cards_found": 0,
-    "items_extracted": 0,
+    "selector_used": "li.product",
+    "cards_found": 40,
+    "items_extracted": 20,
     "error": null,
-    "candidate_selectors": []
+    "candidate_selectors": null
   },
   {
     "store_name": "The Gun Dock",
@@ -107,34 +139,46 @@
     "cards_found": 0,
     "items_extracted": 0,
     "error": null,
-    "candidate_selectors": [
-      {
-        "selector": "div.deal-msrp",
-        "count": 95
-      },
-      {
-        "selector": "div.deal-price",
-        "count": 95
-      },
-      {
-        "selector": "div.deal-savings",
-        "count": 95
-      },
-      {
-        "selector": "footer.site-footer",
-        "count": 1
-      }
-    ]
+    "candidate_selectors": {
+      "price_element": [
+        {
+          "selector": "div.deal-msrp",
+          "count": 95
+        },
+        {
+          "selector": "div.deal-price",
+          "count": 95
+        },
+        {
+          "selector": "div.deal-savings",
+          "count": 95
+        },
+        {
+          "selector": "footer.site-footer",
+          "count": 1
+        }
+      ],
+      "card_candidates": [
+        {
+          "selector": "div.deal-pricing",
+          "count": 190
+        },
+        {
+          "selector": "div.deal-info",
+          "count": 95
+        }
+      ]
+    }
   },
   {
     "store_name": "Vance Outdoors",
     "url": "https://www.vanceoutdoors.com/category.cfm/sale/y",
     "status": 200,
-    "selector_used": null,
-    "cards_found": 0,
-    "items_extracted": 0,
+    "selector_used": ".product-card",
+    "cards_found": 18,
+    "items_extracted": 18,
     "error": null,
-    "candidate_selectors": []
+    "candidate_selectors": null
   },
   {
     "store_name": "OpticsPlanet",
@@ -144,7 +188,10 @@
     "cards_found": 0,
     "items_extracted": 0,
     "error": null,
-    "candidate_selectors": []
+    "candidate_selectors": {
+      "price_element": [],
+      "card_candidates": []
+    }
   },
   {
     "store_name": "RMA Defense",
