@@ -77,29 +77,34 @@ SITE_DELAY_SECONDS = 2.5
 def discover_candidates(soup, limit=8):
     """
     For sites where no known selector pattern matched, scan the page for
-    anything that looks like a price and report:
+    anything that looks like a price and report three tiers of ancestor
+    elements (tag + class list):
       - "price_element": the nearest classed ancestor of the price text
-      - "card_candidates": the next classed ancestor above that — usually
-        the actual product card wrapper, which is what we want for
-        card_selector overrides.
+      - "card_candidates": the next classed ancestor above that
+      - "outer_candidates": one level further up still
+
+    The actual product card wrapper is often "card_candidates", but for
+    sites with deeper nesting it may be "outer_candidates" instead.
     """
     price_counter = Counter()
     card_counter = Counter()
+    outer_counter = Counter()
 
     for text_node in soup.find_all(string=PRICE_RE):
         el = text_node.parent
         depth = 0
-        found_price_el = False
-        while el is not None and depth < 10:
+        tier = 0  # 0 = looking for price_element, 1 = card, 2 = outer
+        while el is not None and depth < 12 and tier < 3:
             classes = el.get("class") if hasattr(el, "get") else None
             if el.name and classes:
                 key = (el.name, tuple(classes))
-                if not found_price_el:
+                if tier == 0:
                     price_counter[key] += 1
-                    found_price_el = True
-                else:
+                elif tier == 1:
                     card_counter[key] += 1
-                    break
+                else:
+                    outer_counter[key] += 1
+                tier += 1
             el = el.parent
             depth += 1
 
@@ -112,6 +117,7 @@ def discover_candidates(soup, limit=8):
     return {
         "price_element": to_list(price_counter),
         "card_candidates": to_list(card_counter),
+        "outer_candidates": to_list(outer_counter),
     }
 
 
@@ -284,7 +290,11 @@ def main():
             f"error={debug_info['error']}"
         )
         candidates = debug_info["candidate_selectors"]
-        if candidates and (candidates["price_element"] or candidates["card_candidates"]):
+        if candidates and (
+            candidates["price_element"]
+            or candidates["card_candidates"]
+            or candidates["outer_candidates"]
+        ):
             print(f"  -> candidates: {candidates}")
         all_results.extend(results)
         debug_log.append(debug_info)
