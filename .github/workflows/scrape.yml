@@ -1,9 +1,6 @@
 name: Scrape Deals
 
-on:
-  workflow_dispatch: {}
-  schedule:
-    - cron: "0 13 * * *"
+on: workflow_dispatch
 
 permissions:
   contents: write
