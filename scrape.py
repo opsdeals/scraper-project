@@ -44,16 +44,6 @@ HEADERS = {
     ),
     "Accept-Language": "en-US,en;q=0.9",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Sec-Fetch-User": "?1",
-    "Sec-Ch-Ua": '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
-    "Sec-Ch-Ua-Mobile": "?0",
-    "Sec-Ch-Ua-Platform": '"Windows"',
 }
 
 # Matches things like $19.99, $1,299.00, $5
@@ -87,28 +77,42 @@ SITE_DELAY_SECONDS = 2.5
 def discover_candidates(soup, limit=8):
     """
     For sites where no known selector pattern matched, scan the page for
-    anything that looks like a price and report the nearest ancestor
-    element (tag + class list) that contains it. This gives a ranked list
-    of likely "product card" selectors to add for this site.
+    anything that looks like a price and report:
+      - "price_element": the nearest classed ancestor of the price text
+      - "card_candidates": the next classed ancestor above that — usually
+        the actual product card wrapper, which is what we want for
+        card_selector overrides.
     """
-    counter = Counter()
+    price_counter = Counter()
+    card_counter = Counter()
+
     for text_node in soup.find_all(string=PRICE_RE):
         el = text_node.parent
         depth = 0
-        while el is not None and depth < 8:
+        found_price_el = False
+        while el is not None and depth < 10:
             classes = el.get("class") if hasattr(el, "get") else None
             if el.name and classes:
                 key = (el.name, tuple(classes))
-                counter[key] += 1
-                break
+                if not found_price_el:
+                    price_counter[key] += 1
+                    found_price_el = True
+                else:
+                    card_counter[key] += 1
+                    break
             el = el.parent
             depth += 1
 
-    candidates = []
-    for (tag, classes), count in counter.most_common(limit):
-        selector = tag + "." + ".".join(classes)
-        candidates.append({"selector": selector, "count": count})
-    return candidates
+    def to_list(counter):
+        out = []
+        for (tag, classes), count in counter.most_common(limit):
+            out.append({"selector": tag + "." + ".".join(classes), "count": count})
+        return out
+
+    return {
+        "price_element": to_list(price_counter),
+        "card_candidates": to_list(card_counter),
+    }
 
 
 def extract_item(card, base_url):
@@ -207,20 +211,8 @@ def scrape_site(session, site):
 
     base_url = site.get("base_url") or site["url"]
 
-    # Warm up: visit the homepage first so we pick up cookies and look more
-    # like a normal browser session, then request the target page with a
-    # Referer set. Helps with some basic bot-protection setups (won't help
-    # against full JS-challenge systems like Akamai).
     try:
-        session.get(base_url, headers=HEADERS, timeout=20)
-    except requests.RequestException:
-        pass
-
-    request_headers = dict(HEADERS)
-    request_headers["Referer"] = base_url
-
-    try:
-        resp = session.get(site["url"], headers=request_headers, timeout=25)
+        resp = session.get(site["url"], headers=HEADERS, timeout=25)
         debug_info["status"] = resp.status_code
         resp.raise_for_status()
     except requests.RequestException as exc:
@@ -291,8 +283,9 @@ def main():
             f"items={debug_info['items_extracted']} "
             f"error={debug_info['error']}"
         )
-        if debug_info["candidate_selectors"]:
-            print(f"  -> candidate selectors: {debug_info['candidate_selectors']}")
+        candidates = debug_info["candidate_selectors"]
+        if candidates and (candidates["price_element"] or candidates["card_candidates"]):
+            print(f"  -> candidates: {candidates}")
         all_results.extend(results)
         debug_log.append(debug_info)
         time.sleep(SITE_DELAY_SECONDS)
