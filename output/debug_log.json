@@ -29,7 +29,8 @@
     "error": null,
     "candidate_selectors": {
       "price_element": [],
-      "card_candidates": []
+      "card_candidates": [],
+      "outer_candidates": []
     }
   },
   {
@@ -108,6 +109,16 @@
           "selector": "li.bulk-norm",
           "count": 1
         }
+      ],
+      "outer_candidates": [
+        {
+          "selector": "div.prd-det-ctn",
+          "count": 46
+        },
+        {
+          "selector": "ul.list-unstyled.bulk",
+          "count": 1
+        }
       ]
     }
   },
@@ -135,40 +146,11 @@
     "store_name": "The Gun Dock",
     "url": "https://www.thegundock.com/live/deals",
     "status": 200,
-    "selector_used": null,
-    "cards_found": 0,
-    "items_extracted": 0,
+    "selector_used": "div.deal-info",
+    "cards_found": 94,
+    "items_extracted": 20,
     "error": null,
-    "candidate_selectors": {
-      "price_element": [
-        {
-          "selector": "div.deal-msrp",
-          "count": 95
-        },
-        {
-          "selector": "div.deal-price",
-          "count": 95
-        },
-        {
-          "selector": "div.deal-savings",
-          "count": 95
-        },
-        {
-          "selector": "footer.site-footer",
-          "count": 1
-        }
-      ],
-      "card_candidates": [
-        {
-          "selector": "div.deal-pricing",
-          "count": 190
-        },
-        {
-          "selector": "div.deal-info",
-          "count": 95
-        }
-      ]
-    }
+    "candidate_selectors": null
   },
   {
     "store_name": "Vance Outdoors",
@@ -190,7 +172,8 @@
     "error": null,
     "candidate_selectors": {
       "price_element": [],
-      "card_candidates": []
+      "card_candidates": [],
+      "outer_candidates": []
     }
   },
   {
