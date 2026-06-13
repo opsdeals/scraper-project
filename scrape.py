@@ -31,6 +31,7 @@ import json
 import os
 import re
 import time
+from collections import Counter
 from urllib.parse import urljoin
 
 import requests
@@ -43,6 +44,16 @@ HEADERS = {
     ),
     "Accept-Language": "en-US,en;q=0.9",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Sec-Ch-Ua": '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+    "Sec-Ch-Ua-Mobile": "?0",
+    "Sec-Ch-Ua-Platform": '"Windows"',
 }
 
 # Matches things like $19.99, $1,299.00, $5
@@ -71,6 +82,33 @@ MAX_ITEMS_PER_SITE = 20
 MAX_DESCRIPTIONS_PER_SITE = 10
 REQUEST_DELAY_SECONDS = 1.5
 SITE_DELAY_SECONDS = 2.5
+
+
+def discover_candidates(soup, limit=8):
+    """
+    For sites where no known selector pattern matched, scan the page for
+    anything that looks like a price and report the nearest ancestor
+    element (tag + class list) that contains it. This gives a ranked list
+    of likely "product card" selectors to add for this site.
+    """
+    counter = Counter()
+    for text_node in soup.find_all(string=PRICE_RE):
+        el = text_node.parent
+        depth = 0
+        while el is not None and depth < 8:
+            classes = el.get("class") if hasattr(el, "get") else None
+            if el.name and classes:
+                key = (el.name, tuple(classes))
+                counter[key] += 1
+                break
+            el = el.parent
+            depth += 1
+
+    candidates = []
+    for (tag, classes), count in counter.most_common(limit):
+        selector = tag + "." + ".".join(classes)
+        candidates.append({"selector": selector, "count": count})
+    return candidates
 
 
 def extract_item(card, base_url):
@@ -138,10 +176,10 @@ def extract_item(card, base_url):
     }
 
 
-def fetch_description(url):
+def fetch_description(session, url):
     """Try to grab a short description from a product page's meta tags."""
     try:
-        resp = requests.get(url, headers=HEADERS, timeout=20)
+        resp = session.get(url, headers=HEADERS, timeout=20)
         resp.raise_for_status()
         soup = BeautifulSoup(resp.text, "lxml")
         for attrs in ({"name": "description"}, {"property": "og:description"}):
@@ -155,7 +193,7 @@ def fetch_description(url):
     return ""
 
 
-def scrape_site(site):
+def scrape_site(session, site):
     debug_info = {
         "store_name": site["store_name"],
         "url": site["url"],
@@ -164,10 +202,25 @@ def scrape_site(site):
         "cards_found": 0,
         "items_extracted": 0,
         "error": None,
+        "candidate_selectors": None,
     }
 
+    base_url = site.get("base_url") or site["url"]
+
+    # Warm up: visit the homepage first so we pick up cookies and look more
+    # like a normal browser session, then request the target page with a
+    # Referer set. Helps with some basic bot-protection setups (won't help
+    # against full JS-challenge systems like Akamai).
     try:
-        resp = requests.get(site["url"], headers=HEADERS, timeout=25)
+        session.get(base_url, headers=HEADERS, timeout=20)
+    except requests.RequestException:
+        pass
+
+    request_headers = dict(HEADERS)
+    request_headers["Referer"] = base_url
+
+    try:
+        resp = session.get(site["url"], headers=request_headers, timeout=25)
         debug_info["status"] = resp.status_code
         resp.raise_for_status()
     except requests.RequestException as exc:
@@ -178,7 +231,12 @@ def scrape_site(site):
 
     cards = []
     selector_used = None
-    for selector in CARD_SELECTOR_CANDIDATES:
+
+    # Site-specific override takes priority if provided
+    override = site.get("card_selector")
+    selector_list = ([override] if override else []) + CARD_SELECTOR_CANDIDATES
+
+    for selector in selector_list:
         found = soup.select(selector)
         if not found:
             continue
@@ -192,7 +250,9 @@ def scrape_site(site):
     debug_info["selector_used"] = selector_used
     debug_info["cards_found"] = len(cards)
 
-    base_url = site.get("base_url") or site["url"]
+    if not cards:
+        debug_info["candidate_selectors"] = discover_candidates(soup)
+
     results = []
     for card in cards[:MAX_ITEMS_PER_SITE]:
         item = extract_item(card, base_url)
@@ -206,7 +266,7 @@ def scrape_site(site):
     # Fetch descriptions for a limited number of items (extra requests)
     for item in results[:MAX_DESCRIPTIONS_PER_SITE]:
         if item["affiliate_link"]:
-            item["excerpt"] = fetch_description(item["affiliate_link"])
+            item["excerpt"] = fetch_description(session, item["affiliate_link"])
             time.sleep(REQUEST_DELAY_SECONDS)
 
     return results, debug_info
@@ -219,9 +279,11 @@ def main():
     all_results = []
     debug_log = []
 
+    session = requests.Session()
+
     for site in sites:
         print(f"Scraping {site['store_name']} ({site['url']}) ...")
-        results, debug_info = scrape_site(site)
+        results, debug_info = scrape_site(session, site)
         print(
             f"  -> status={debug_info['status']} "
             f"selector={debug_info['selector_used']} "
@@ -229,6 +291,8 @@ def main():
             f"items={debug_info['items_extracted']} "
             f"error={debug_info['error']}"
         )
+        if debug_info["candidate_selectors"]:
+            print(f"  -> candidate selectors: {debug_info['candidate_selectors']}")
         all_results.extend(results)
         debug_log.append(debug_info)
         time.sleep(SITE_DELAY_SECONDS)
