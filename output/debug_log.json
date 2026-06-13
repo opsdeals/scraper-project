@@ -6,16 +6,18 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": "403 Client Error: Forbidden for url: https://palmettostatearmory.com/daily-deals-new.html"
+    "error": "403 Client Error: Forbidden for url: https://palmettostatearmory.com/daily-deals-new.html",
+    "candidate_selectors": null
   },
   {
     "store_name": "Bear Creek Arsenal",
     "url": "https://www.bearcreekarsenal.com/deals-den.html",
     "status": 200,
-    "selector_used": "li.product",
-    "cards_found": 12,
-    "items_extracted": 12,
-    "error": null
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": null,
+    "candidate_selectors": []
   },
   {
     "store_name": "Bereli",
@@ -24,7 +26,8 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": null
+    "error": null,
+    "candidate_selectors": []
   },
   {
     "store_name": "Midway USA",
@@ -33,7 +36,8 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/ammunition/br?cid=653&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box"
+    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/ammunition/br?cid=653&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "candidate_selectors": null
   },
   {
     "store_name": "Midway USA",
@@ -42,7 +46,8 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/knives-and-tools/br?cid=18708&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box"
+    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/knives-and-tools/br?cid=18708&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "candidate_selectors": null
   },
   {
     "store_name": "Midway USA",
@@ -51,7 +56,8 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/hunting-gear/br?cid=10611&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box"
+    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/hunting-gear/br?cid=10611&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "candidate_selectors": null
   },
   {
     "store_name": "Midway USA",
@@ -60,7 +66,8 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/shooting-gear/br?cid=655&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box"
+    "error": "403 Client Error: Forbidden for url: https://www.midwayusa.com/shooting-gear/br?cid=655&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "candidate_selectors": null
   },
   {
     "store_name": "Sportsman's Outdoor Superstore",
@@ -69,7 +76,8 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": null
+    "error": null,
+    "candidate_selectors": []
   },
   {
     "store_name": "Dirty Bird USA",
@@ -78,16 +86,18 @@
     "selector_used": "li.product",
     "cards_found": 24,
     "items_extracted": 20,
-    "error": null
+    "error": null,
+    "candidate_selectors": null
   },
   {
     "store_name": "Gun Mag Warehouse",
     "url": "https://gunmagwarehouse.com/sale",
     "status": 200,
-    "selector_used": "li.product",
-    "cards_found": 40,
-    "items_extracted": 20,
-    "error": null
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": null,
+    "candidate_selectors": []
   },
   {
     "store_name": "The Gun Dock",
@@ -96,16 +106,35 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": null
+    "error": null,
+    "candidate_selectors": [
+      {
+        "selector": "div.deal-msrp",
+        "count": 95
+      },
+      {
+        "selector": "div.deal-price",
+        "count": 95
+      },
+      {
+        "selector": "div.deal-savings",
+        "count": 95
+      },
+      {
+        "selector": "footer.site-footer",
+        "count": 1
+      }
+    ]
   },
   {
     "store_name": "Vance Outdoors",
     "url": "https://www.vanceoutdoors.com/category.cfm/sale/y",
     "status": 200,
-    "selector_used": ".product-card",
-    "cards_found": 18,
-    "items_extracted": 18,
-    "error": null
+    "selector_used": null,
+    "cards_found": 0,
+    "items_extracted": 0,
+    "error": null,
+    "candidate_selectors": []
   },
   {
     "store_name": "OpticsPlanet",
@@ -114,7 +143,8 @@
     "selector_used": null,
     "cards_found": 0,
     "items_extracted": 0,
-    "error": null
+    "error": null,
+    "candidate_selectors": []
   },
   {
     "store_name": "RMA Defense",
@@ -123,6 +153,7 @@
     "selector_used": "ul.products li.product",
     "cards_found": 7,
     "items_extracted": 7,
-    "error": null
+    "error": null,
+    "candidate_selectors": null
   }
 ]
