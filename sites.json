@@ -3,7 +3,93 @@
     "store_name": "Palmetto State Armory",
     "category": "",
     "url": "https://palmettostatearmory.com/daily-deals-new.html",
+    "base_url": "https://palmetto[
+  {
+    "store_name": "Palmetto State Armory",
+    "category": "",
+    "url": "https://palmettostatearmory.com/daily-deals-new.html",
     "base_url": "https://palmettostatearmory.com"
+  },
+  {
+    "store_name": "Bear Creek Arsenal",
+    "category": "ammo",
+    "url": "https://www.bearcreekarsenal.com/deals-den.html",
+    "base_url": "https://www.bearcreekarsenal.com"
+  },
+  {
+    "store_name": "Bereli",
+    "category": "",
+    "url": "https://www.bereli.com/deals",
+    "base_url": "https://www.bereli.com"
+  },
+  {
+    "store_name": "Midway USA",
+    "category": "ammo",
+    "url": "https://www.midwayusa.com/ammunition/br?cid=653&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "base_url": "https://www.midwayusa.com"
+  },
+  {
+    "store_name": "Midway USA",
+    "category": "edc",
+    "url": "https://www.midwayusa.com/knives-and-tools/br?cid=18708&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "base_url": "https://www.midwayusa.com"
+  },
+  {
+    "store_name": "Midway USA",
+    "category": "accessories",
+    "url": "https://www.midwayusa.com/hunting-gear/br?cid=10611&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "base_url": "https://www.midwayusa.com"
+  },
+  {
+    "store_name": "Midway USA",
+    "category": "accessories",
+    "url": "https://www.midwayusa.com/shooting-gear/br?cid=655&Discounts+and+Deals=Sale&Discounts+and+Deals=Clearance&Discounts+and+Deals=Open+Box",
+    "base_url": "https://www.midwayusa.com"
+  },
+  {
+    "store_name": "Sportsman's Outdoor Superstore",
+    "category": "",
+    "url": "https://www.sportsmansoutdoorsuperstore.com/black-friday.cfm/sale/all",
+    "base_url": "https://www.sportsmansoutdoorsuperstore.com"
+  },
+  {
+    "store_name": "Dirty Bird USA",
+    "category": "",
+    "url": "https://dirtybirdusa.com/collections/daily-deals/",
+    "base_url": "https://dirtybirdusa.com"
+  },
+  {
+    "store_name": "Gun Mag Warehouse",
+    "category": "",
+    "url": "https://gunmagwarehouse.com/sale",
+    "base_url": "https://gunmagwarehouse.com"
+  },
+  {
+    "store_name": "The Gun Dock",
+    "category": "",
+    "url": "https://www.thegundock.com/live/deals",
+    "base_url": "https://www.thegundock.com",
+    "card_selector": "div.deal-info"
+  },
+  {
+    "store_name": "Vance Outdoors",
+    "category": "",
+    "url": "https://www.vanceoutdoors.com/category.cfm/sale/y",
+    "base_url": "https://www.vanceoutdoors.com"
+  },
+  {
+    "store_name": "OpticsPlanet",
+    "category": "optics",
+    "url": "https://ads.opticsplanet.com/blazin-deal.html",
+    "base_url": "https://ads.opticsplanet.com"
+  },
+  {
+    "store_name": "RMA Defense",
+    "category": "parts",
+    "url": "https://rmadefense.com/product-category/steals-and-deals/",
+    "base_url": "https://rmadefense.com"
+  }
+]statearmory.com"
   },
   {
     "store_name": "Bear Creek Arsenal",
